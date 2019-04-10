@@ -4,13 +4,15 @@ interface ICreateOptions {
      */
     directory?: string;
 
-    /**
-     * An array of hex encoded public keys which are used to set write access to the database.
-     * ["*"] can be passed in to give write access to everyone.
-     * See the GETTING STARTED guide for more info.
-     * (Default: uses the OrbitDB instance key orbitdb.key, which would give write access only to yourself)
-     */
-    write?: string[];
+    accessController: {
+        /**
+         * An array of hex encoded public keys which are used to set write access to the database.  
+         * ["*"] can be passed in to give write access to everyone.  
+         * See the GETTING STARTED guide for more info.  
+         * (Default: uses the OrbitDB instance key orbitdb.key, which would give write access only to yourself)
+         */
+        write?: string[];
+    };
 
     /**
      * Overwrite an existing database (Default: false)

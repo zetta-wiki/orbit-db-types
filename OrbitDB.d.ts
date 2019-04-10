@@ -8,6 +8,8 @@ declare module 'orbit-db' {
     import { DocumentStore } from "orbit-db-docstore";
     import { CounterStore } from "orbit-db-counterstore";
     import { Keystore } from "orbit-db-keystore";
+    import { Cache } from "orbit-db-cache";
+    import { Identity } from "orbit-db-identity-provider";
     import * as IPFS from "ipfs";
     import * as elliptic from "elliptic";
 
@@ -22,15 +24,14 @@ declare module 'orbit-db' {
         
         /**
          * Creates and returns an instance of OrbitDB. 
-         * @param ipfs 
-         * @param directory Directory to be used for the database files (Default `./orbitdb`)
-         * @param options Other options: 
-         * <ul><li>peerId: By default it uses the base58 string of the ipfs peer id.</li></ul>
          */
-        constructor(ipfs: IPFS, directory?: string, options?: {
-            peerId?: string,
-            keystore?: Keystore
-        });
+        static createInstance(ipfs: IPFS, options?: {
+            directory?: string,
+            peerId?: string,     // By default it uses the base58 string of the ipfs peer id.
+            keystore?: Keystore,
+            cache?: Cache,
+            identity?: Identity,
+        }): Promise<OrbitDB>;
 
         create(name: string, type: string, options?: ICreateOptions): Promise<Store>;
 
